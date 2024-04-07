@@ -1,17 +1,15 @@
-# Use an official Python runtime as the base image
-FROM python:3.11
-
-# Set the working directory inside the container
-WORKDIR /app
-
-# Copy the current directory contents into the container at /app
-COPY . /app
-
-# Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Train your model (replace with actual training commands)
+FROM python:3.12.2
+ 
+WORKDIR /code/data
+ 
+COPY /data/test.csv /data/train.csv /code/data/
+ 
+WORKDIR /code
+ 
+COPY train.py test.py requirements.txt /code/
+ 
+RUN pip install --no-cache-dir -r /code/requirements.txt
+ 
 RUN python train.py
-
-# Specify the command to execute when the container starts
+ 
 CMD ["python", "test.py"]
