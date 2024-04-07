@@ -27,7 +27,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: utkarshraj29/bothPASS:latest
+          tags: utkarshraj29/bothpass2:latest
           file: ./dockerfile
   test_image:
     name: Docker image
@@ -35,11 +35,11 @@ jobs:
  
     steps:
       - name: Pull Docker image
-        run: docker pull utkarshraj29/bothPASS:latest
+        run: docker pull utkarshraj29/bothpass2:latest
  
       - name: Docker image test
         run: |
-          OUTPUT=$(docker run --rm utkarshraj29/bothPASS:latest)
+          OUTPUT=$(docker run --rm utkarshraj29/bothpass2:latest)
           echo "Score: $OUTPUT"
           if [[ `echo "$OUTPUT 0.50" | awk '{print ($1 < $2)}'` == 1 ]]; then
             echo "Insufficient Accuracy"
